@@ -1,0 +1,3 @@
+[submodule "www/angular-upload"]
+	path = www/angular-upload
+	url = git@github.com:danialfarid/angular-file-upload.git

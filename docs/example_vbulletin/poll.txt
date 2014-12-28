@@ -1,0 +1,630 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta id="e_vb_meta_bburl" name="vb_meta_bburl" content="http://blenderartists.org/forum"/>
+<base href="http://blenderartists.org/forum/"/><!--[if IE]></base><![endif]-->
+<meta name="generator" content="vBulletin 4.2.2"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok9v=790cacef83/"},atok:"f7996f84c3f3dc1f3e6333f8c121cb1c",petok:"177e8ece28d630b2a81a776f0362ee454ba823a8-1400200191-1800",zone:"blenderartists.org",rocket:"0",apps:{"ga_key":{"ua":"UA-468159-28","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok9v=97fb4d042e/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<link rel="Shortcut Icon" href="http://www.blenderartists.org/favicon.ico" type="image/x-icon"/>
+<meta name="keywords" content="Blender 3D Computer Graphics Animation Modeling Texturing Gameengine multimedia Rendering Raytracing art artists"/>
+<meta name="description" content="Blender Artists is an online creative forum that is dedicated to the growth and education of the 3D software Blender."/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$.noConflict();
+
+jQuery(document).ready(function($){
+
+/*	$('#toggle_feature_image').click(function(){
+
+		link = $(this);
+
+		$('#featured_posts').slideToggle( function() {
+
+   	 	if ($(this).is(":visible")) {
+
+      link.text('[ - ] Hide Feature Row');                
+
+    	} else {
+
+        link.text('[ + ] Show Feature Row');                
+
+    	}
+
+		});
+
+	});*/
+
+	$(document.body).on('click','#network-nav-toggle a',function(e){
+
+		e.preventDefault();
+
+		var cgcookieframe=$('#network-nav');
+
+		if(cgcookieframe.is(':hidden')){
+
+			cgcookieframe.slideDown('slow');
+
+			$(this).html('&#x25b2;');
+
+		}else{
+
+			cgcookieframe.slideUp('slow');
+
+			$(this).html('&#x25bc;');
+
+		}
+
+	});
+
+	$(document.body).on('click','#toggle_feature_image',function(e){
+
+		e.preventDefault();
+
+		var root = location.protocol + '//' + location.host;
+
+		$.ajax({
+
+			url: location.protocol + '//' + location.host + "/featureimagecontrols.php?a=toggle",
+
+		}).done(function(response){
+
+			obj=$.parseJSON(response);
+
+			if(obj.feature_image_status==1){
+
+				$('#featured_posts').slideDown('fast');
+
+				$('#toggle_feature_image').html('[ - ] Hide Feature Row');
+
+			}else{
+
+				$('#featured_posts').slideUp('fast');
+
+				$('#toggle_feature_image').html('[ + ] Show Feature Row');
+
+			}
+
+		});
+
+	});
+
+	$.ajax({
+
+		url: location.protocol + '//' + location.host + "/featureimagecontrols.php",
+
+	}).done(function(response){
+
+		obj=$.parseJSON(response);
+
+		if(obj.feature_image_status==1){
+
+			$('#featured_posts').fadeIn('fast');
+
+			$('#toggle_feature_image').html('[ - ] Hide Feature Row');
+
+		}else{
+
+			$('#featured_posts').hide();
+
+			$('#toggle_feature_image').html('[ + ] Show Feature Row');
+
+		}
+
+	});
+
+});
+
+</script>
+<script type="text/javascript">
+
+<!--
+
+	if (typeof YAHOO === 'undefined') // Load ALL YUI Local
+
+	{
+
+		document.write('<script type="text/javascript" src="clientscript/yui/yuiloader-dom-event/yuiloader-dom-event.js?v=422"><\/script>');
+
+		document.write('<script type="text/javascript" src="clientscript/yui/connection/connection-min.js?v=422"><\/script>');
+
+		var yuipath = 'clientscript/yui';
+
+		var yuicombopath = '';
+
+		var remoteyui = false;
+
+	}
+
+	else	// Load Rest of YUI remotely (where possible)
+
+	{
+
+		var yuipath = 'clientscript/yui';
+
+		var yuicombopath = '';
+
+		var remoteyui = true;
+
+		if (!yuicombopath)
+
+		{
+
+			document.write('<script type="text/javascript" src="clientscript/yui/connection/connection-min.js?v=422"><\/script>');
+
+		}
+
+	}
+
+	var SESSIONURL = "";
+
+	var SECURITYTOKEN = "1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a";
+
+	var IMGDIR_MISC = "../design/baorg2012dark/images/misc";
+
+	var IMGDIR_BUTTON = "../design/baorg2012dark/images/buttons";
+
+	var vb_disable_ajax = parseInt("0", 10);
+
+	var SIMPLEVERSION = "422";
+
+	var BBURL = "http://blenderartists.org/forum";
+
+	var LOGGEDIN = 21543 > 0 ? true : false;
+
+	var THIS_SCRIPT = "poll";
+
+	var RELPATH = "poll.php?t=336897&amp;polloptions=8";
+
+	var PATHS = {
+
+		forum : "",
+
+		cms   : "",
+
+		blog  : ""
+
+	};
+
+	var AJAXBASEURL = "http://blenderartists.org/forum/";
+
+// -->
+
+</script>
+<script type="text/javascript" src="http://blenderartists.org/forum/clientscript/vbulletin-core.js?v=422"></script>
+<link rel="alternate" type="application/rss+xml" title="Blender Artists Community RSS Feed" href="http://blenderartists.org/forum/external.php?type=RSS2"/>
+<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/main-rollup.css?d=1399478158"/>
+<!--[if lt IE 8]>
+
+	<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/popupmenu-ie.css?d=1399478158" />
+
+	<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/vbulletin-ie.css?d=1399478158" />
+
+	<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/vbulletin-chrome-ie.css?d=1399478158" />
+
+	<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/vbulletin-formcontrols-ie.css?d=1399478158" />
+
+	<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/editor-ie.css?d=1399478158" />
+
+	<![endif]-->
+<link rel="stylesheet" type="text/css" href="../design/baorg2012dark/font/fonts.css">
+<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/poll.css?d=1399478158"/>
+<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/poll-ie.css?d=1399478158" /><![endif]-->
+<title> You'll see a few of these [we're porting the bot] (please delete, mods) - Post a Poll</title>
+<link rel="stylesheet" type="text/css" href="clientscript/vbulletin_css/style00013l/additional.css?d=1399478158"/>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-468159-28']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+</head>
+<body>
+ 
+<script type="text/javascript">
+
+(function(){
+
+  var bsa = document.createElement('script');
+
+     bsa.type = 'text/javascript';
+
+     bsa.async = true;
+
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+
+})();
+
+</script>
+ 
+<div id="network-nav" style="display: none; ">
+<div id="network-nav-inner">
+<h1 id="site-name">THE COOKIE NETWORK</h1>
+<ul id="network-sites">
+<li class="network-site "><a href="http://cgcookie.com"><span class="site-color"></span>CG Cookie<span>CGC Education Hub Site</span></a></li>
+<li class="network-site blender"><a href="http://cgcookie.com/blender"><span class="site-color"></span>Blender Cookie<span>Blender Education</span></a></li>
+<li class="network-site concept"><a href="http://cgcookie.com/concept"><span class="site-color"></span>Concept Cookie<span>Concept Art Education</span></a></li>
+<li class="network-site unity"><a href="http://cgcookie.com/unity"><span class="site-color"></span>Unity Cookie<span>Unity Education</span></a></li>
+<li class="network-site workshops"><a href="http://cgcookie.com/workshops"><span class="site-color"></span>Workshops<span>Serious 3D and VFX Education</span></a></li>
+<li class="network-site blender-artists"><a href="http://blenderartists.org" title="The Blender Community" target="_blank"><span class="site-color"></span>Blender Artists<span>The Blender Community</span></a></li>
+</ul>
+</div> 
+</div>
+<div class="above_body">  
+<div id="header" class="floatcontainer doc_header">
+<div class="container clearfix">
+<div><a name="top" href="index.php" class="logo-image"><img src="images/ba-misc/logo.png" alt="Part of the Cg Cookie network"/></a></div>
+<div id="network-nav-toggle">
+<a href="#">&#x25bc;</a>
+</div>
+<div id="toplinks" class="toplinks">
+<div class="welcome_msg">Welcome, <a href="member.php?21543-protocoldoug">protocoldoug</a></div>
+<div class="popupmenu nonotifications" id="nonotifications">
+<a class="popupctrl" href="usercp.php">Notifications</a>
+<ul class="popupbody popuphover">
+<li>No new messages</li>
+<li><a href="private.php">Inbox</a></li>
+</ul>
+</div>
+<ul class="isuser">
+<li><a href="login.php?do=logout&amp;logouthash=1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a" onclick="return log_out('Are you sure you want to log out?')">Log Out</a></li>
+<li><a href="usercp.php">Settings</a></li>
+<li><a href="member.php?21543-protocoldoug">My Profile</a></li>
+</ul>
+</div>
+<div class="ad_global_header">
+</div>
+<hr/>
+</div>
+</div>
+<div class="navigationWrapper">
+<div class="navigation">
+<div id="navbar" class="navbar clearfix">
+<ul id="navtabs" class="navtabs floatcontainer">
+<li class="selected" id="vbtab_forum">
+<a class="navtab" href="forum.php">Forum</a>
+</li>
+<li id="vbtab_whatsnew">
+<a class="navtab" href="activity.php">What's New?</a>
+</li>
+<li id="tab_odm2_827">
+<a class="navtab" href="http://www.meetup.com/Blender/">Blender Meetups</a>
+</li>
+<li class="popupmenu"><a href="javascript://" class="popupctrl navtab" style="background:transparent url(../design/baorg2012dark/images/misc/arrow.png) no-repeat right center; padding-right: 15px">New to Blender?</a><ul class="popupbody popuphover"><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://blender.org" target="_blank">Blender Foundation</a></li><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://www.blender.org/download/get-blender/" target="_self">Download Blender</a></li><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://cgcookie.com/blender/cgc-series/blender-basics-introduction-beginners/" target="_self">Get started with Blender</a></li></ul></li><li class="popupmenu"><a href="javascript://" class="popupctrl navtab" style="background:transparent url(../design/baorg2012dark/images/misc/arrow.png) no-repeat right center; padding-right: 15px">Site Help</a><ul class="popupbody popuphover"><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://blenderartists.org/forum/faq.php" target="_self">FAQ</a></li><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://blenderartists.org/forum/forumdisplay.php?21-Blender-Artists-Website-Support" target="_self">Website Support</a></li><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://www.cloudflare.com/email-protection#4e3d3b3e3e213c3a0e2c222b202a2b3c2f3c3a273d3a3d60213c29" target="_self">E-mail Us</a></li><li style="text-indent: 0px;"><a style="color:rgb(255, 255, 255)" href="http://blenderartists.org/forum/misc.php?do=showrules" target="_self">Forum Rules</a></li></ul></li><li><a class='navtab' href='https://www.facebook.com/blenderartists' target='_blank'> BA Facebook</a></li>
+</ul>
+<div class="navsearch">
+<form action="search.php?do=process" method="post">
+<input type="hidden" name="securitytoken" value="1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a"/>
+<input type="hidden" name="do" value="process"/>
+<span class="textboxcontainer"><span><input type="text" value="" name="query" class="textbox" tabindex="99" placeholder="Search..."/></span></span>
+<span class="buttoncontainer"><span><input type="image" class="searchbutton" src="http://blenderartists.org/design/baorg2012dark/images/search_btn.png" name="submit" onclick="document.getElementById('navbar_search').submit;" tabindex="100"/></span></span>
+</form>
+</div>
+</div>
+</div>
+<div class="subnav clearfix">
+<div class="container clearfix">
+<ul class="navbar_advanced_search">
+<li><a href="search.php" accesskey="4">Advanced Search</a></li>
+</ul>
+<ul class="floatcontainer">
+<li><a href="search.php?do=getnew&amp;contenttype=vBForum_Post">New Posts</a></li>
+<li><a href="private.php" rel="nofollow">Private Messages</a></li>
+<li><a rel="help" href="faq.php" accesskey="5">FAQ</a></li>
+<li><a href="calendar.php">Calendar</a></li>
+<li><a href="forumdisplay.php?do=markread&amp;markreadhash=1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a">Mark Forums Read</a></li>
+<li class="popupmenu">
+<a href="javascript://" class="popupctrl" accesskey="6">Community</a>
+<ul class="popupbody popuphover">
+<li><a href="group.php">Groups</a></li>
+<li><a href="album.php">Albums</a></li>
+<li><a href="profile.php?do=buddylist">Friends &amp; Contacts</a></li>
+</ul>
+</li>
+<li class="popupmenu">
+<a href="javascript://" class="popupctrl">Forum Actions</a>
+<ul class="popupbody popuphover">
+<li>
+<a href="forumdisplay.php?do=markread&amp;markreadhash=1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a">Mark Forums Read</a>
+</li>
+<li>
+<a href="profile.php?do=editoptions">General Settings</a>
+</li>
+<li>
+<a href="profile.php?do=editprofile">Edit Profile</a>
+</li>
+</ul>
+</li>
+<li class="popupmenu">
+<a href="javascript://" class="popupctrl" accesskey="3">Quick Links</a>
+<ul class="popupbody popuphover">
+<li><a href="search.php?do=getdaily&contenttype=vBForum_Post">Today's Posts</a></li>
+<li><a href="subscription.php" rel="nofollow">Subscribed Threads</a></li>
+<li><a href="javascript://" onclick="window.open(getBaseUrl() + 'misc.php?do=buddylist&amp;focus=1','buddylist','statusbar=no,menubar=no,toolbar=no,scrollbars=yes,resizable=yes,width=250,height=300'); return false;">Open Contacts Popup</a></li>
+<li><a href="showgroups.php" rel="nofollow">
+View Forum Leaders
+</a>
+</li>
+<li><a href="online.php">Who's Online</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+ 
+<div class="body_wrapper">
+<div class="container clearfix">
+<div id="ad_global_below_navbar"><div id="global_wrap">
+<div id="global_225">
+<a href="http://cgcookie.com/blender/cgc-courses/blender-basics-introduction-for-beginners/"><img src="https://s3.amazonaws.com/blender-artists-assets/adverts/195x90_blenderBasics.jpg" width="195" height="90"/></a>
+</div>
+<div id="global_728">
+ 
+<div id="bsap_1258499" class="bsarocks bsap_48cbf114d417772dfd31e597cee05817"></div>
+ 
+</div></div></div>
+<div id="featured_posts" class="featured_posts clearfix"><a href='http://blenderartists.org/forum/showthread.php?336856'><img src='../forum/CGC_uploadedFiles/20140515.jpg' height='100' width='184'/></a><a href='http://blenderartists.org/forum/showthread.php?336387'><img src='../forum/CGC_uploadedFiles/20140512.jpg' height='100' width='184'/></a><a href='http://blenderartists.org/forum/showthread.php?335996'><img src='../forum/CGC_uploadedFiles/20140509.jpg' height='100' width='184'/></a><a href='http://blenderartists.org/forum/showthread.php?335554'><img src='../forum/CGC_uploadedFiles/20140506.jpg' height='100' width='184'/></a><a href='http://blenderartists.org/forum/showthread.php?335700-Distant-Worlds-%28project-files-available%29'><img src='../forum/CGC_uploadedFiles/DistantWorlds_thumb.jpg' height='100' width='184'/></a></div>
+<div class="feature_image_controls">
+<a href="#" id="toggle_feature_image">[ - ] Hide Feature Row</a>
+</div>
+<div id="breadcrumb" class="breadcrumb">
+<ul class="floatcontainer">
+<li class="navbithome"><a href="index.php" accesskey="1"><img src="http://blenderartists.org/design/baorg2012dark/images/navbit-home.png" alt="Home"/></a></li>
+<li class="navbit"><a href="index.php">Forum</a></li>
+<li class="navbit"><a href="forumdisplay.php?5-Contests">Contests</a></li>
+<li class="navbit"><a href="forumdisplay.php?22-Speed-Modeling-Contests">Speed Modeling Contests</a></li>
+<li class="navbit"><a href="showthread.php?336897-You-ll-see-a-few-of-these-we-re-porting-the-bot-(please-delete-mods)"> You'll see a few of these [we're porting the bot] (please delete, mods)</a></li>
+<li class="navbit lastnavbit"><span>Post a Poll</span></li>
+</ul>
+<hr/>
+</div>
+<div id="pagetitle">
+<h1>Post a Poll</h1>
+<p class="description">Thread: <a href="showthread.php?336897-You-ll-see-a-few-of-these-we-re-porting-the-bot-(please-delete-mods)">You'll see a few of these [we're porting the bot] (please delete, mods)</a></p>
+</div>
+<form action="poll.php?do=postpoll&amp;t=336897" method="post" class="vbform block">
+<h2 class="blockhead">Poll Settings</h2>
+<div class="blockbody formcontrols">
+<div class="blockrow">
+<label for="pollquestion">Poll Question:</label>
+<input type="text" class="primary textbox" id="pollquestion" name="question" value="" maxlength="85" tabindex="1"/>
+</div>
+<h3 class="blocksubhead">Poll Options</h3>
+<div class="blockrow">
+<label for="polloptnum">Number of poll options:</label>
+<input type="text" class="primary textbox" id="polloptnum" name="polloptions" tabindex="1" value="8" size="5"/>
+<input type="submit" class="button" value="Update options" tabindex="1" name="updatenumber"/>
+</div>
+<div class="blockrow">
+<p class="description">Remember to keep the poll options short and to the point</p>
+<ul class="group multifield">
+<li><label for="opt1">Option 1:</label><input type="text" class="primary textbox" id="opt1" name="options[1]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt2">Option 2:</label><input type="text" class="primary textbox" id="opt2" name="options[2]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt3">Option 3:</label><input type="text" class="primary textbox" id="opt3" name="options[3]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt4">Option 4:</label><input type="text" class="primary textbox" id="opt4" name="options[4]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt5">Option 5:</label><input type="text" class="primary textbox" id="opt5" name="options[5]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt6">Option 6:</label><input type="text" class="primary textbox" id="opt6" name="options[6]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt7">Option 7:</label><input type="text" class="primary textbox" id="opt7" name="options[7]" tabindex="1" value=""/></li>
+</ul><ul class="group multifield">
+<li><label for="opt8">Option 8:</label><input type="text" class="primary textbox" id="opt8" name="options[8]" tabindex="1" value=""/></li>
+</ul>
+</div>
+<div class="blockrow">
+<label for="poll_timeout">Poll Timeout:</label>
+<div><input type="text" class="primary textbox" id="poll_timeout" size="4" name="timeout" tabindex="1" value=""/>&nbsp; days after Today</div>
+<p class="description">If you would like this poll to automatically close after a period of time, enter a number of days here.<br/>Set this to 0 if you would like the poll to remain open indefinitely.</p>
+</div>
+<h3 class="blocksubhead">Show results</h3>
+<div class="blockrow">
+<label>Results will always show for threadstarter, moderators and administrators.</label>
+<ul class="group checkradio rightcol">
+<li><label for="cb_hidden_results_show"><input type="radio" name="hidden_results" value="0" id="cb_hidden_results_show" tabindex="1" checked="checked"/> Always show results</label></li>
+<li><label for="cb_hidden_results_hide"><input type="radio" name="hidden_results" value="1" id="cb_hidden_results_hide" tabindex="1"/> Hide Results</label></li>
+<li><label for="cb_hidden_results_hide_closed"><input type="radio" name="hidden_results" value="2" id="cb_hidden_results_hide_closed" tabindex="1"/> Show results when finished/closed.
+</label></li>
+</ul>
+</div>
+<h3 class="blocksubhead">Additional Options</h3>
+<div class="blockrow">
+<label>Miscellaneous Options:</label>
+<ul class="checkradio group rightcol">
+<li>
+<label for="cb_multiple"><input type="checkbox" name="multiple" value="1" id="cb_multiple" tabindex="1"/> Allow multiple choice</label><p class="description">Give users the ability to select more than one answer.</p>
+</li>
+<li>
+<label for="cb_public"><input type="checkbox" name="public" value="1" id="cb_public" tabindex="1"/> Make votes public</label><p class="description">Displays all users who voted, and what choice they voted for.</p>
+</li>
+<li>
+<label for="cb_parseurl"><input type="checkbox" name="parseurl" value="1" id="cb_parseurl" tabindex="1" checked="checked"/> Automatically parse links in text</label><p class="description">Will turn www.example.com into [URL]http://www.example.com[/URL].</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="blockfoot actionbuttons">
+<div class="group">
+<input type="hidden" name="s" value=""/>
+<input type="hidden" name="securitytoken" value="1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a"/>
+<input type="hidden" name="t" value="336897"/>
+<input type="hidden" name="do" value="postpoll"/>
+<input type="submit" class="button" name="sbutton" value="Submit New Poll" accesskey="s" tabindex="1"/>
+<input type="submit" class="button" name="preview" value="Preview Poll" accesskey="r" tabindex="1"/>
+</div>
+</div>
+<h4 class="blockhead">Posting Permissions</h4>
+<div class="blockbody">
+<div id="forumrules" class="blockrow floatcontainer">
+<ul class="youcandoblock">
+<li>You <strong>may</strong> post new threads</li>
+<li>You <strong>may</strong> post replies</li>
+<li>You <strong>may</strong> post attachments</li>
+<li>You <strong>may</strong> edit your posts</li>
+<li>&nbsp;</li>
+</ul>
+<div class="bbcodeblock">
+<ul>
+<li><a href="misc.php?do=bbcode" target="_blank">BB code</a> is <strong>On</strong></li>
+<li><a href="misc.php?do=showsmilies" target="_blank">Smilies</a> are <strong>On</strong></li>
+<li><a href="misc.php?do=bbcode#imgcode" target="_blank">[IMG]</a> code is <strong>On</strong></li>
+<li><a href="misc.php?do=bbcode#videocode" target="_blank">[VIDEO]</a> code is <strong>On</strong></li>
+<li>HTML code is <strong>Off</strong></li>
+</ul>
+</div>
+<p class="rules_link"><a href="misc.php?do=showrules" target="_blank">Forum Rules</a></p>
+</div>
+</div>
+</form>
+<div style="clear: left">
+</div>
+</div>  
+<div class="below_body">
+<div id="footer_time" class="shade footer_time">All times are GMT -4. The time now is <span class="time">20:29</span>.</div>
+<div id="footer_copyright" class="shade footer_copyright">
+ 
+Powered by <a href="https://www.vbulletin.com" id="vbulletinlink">vBulletin&reg;</a> Version 4.2.2 <br/>Copyright &copy; 2014 vBulletin Solutions, Inc. All rights reserved.<br/><br/>
+Part of the <a href="http://www.blendercookie.com" id="vbulletinlink">Blender Cookie</a> Training Network - All trademarks and copyrights owned by their respective owners. Comments are owned by the Poster.
+ 
+</div>
+<div id="footer_morecopyright" class="shade footer_morecopyright">
+ 
+ 
+</div>
+</div>
+<div class="footerWrapper">
+<div id="footer" class="floatcontainer footer">
+<div class="container">
+<form action="index.php" method="get" id="footer_select" class="footer_select">
+<select name="styleid" onchange="switch_id(this, 'style')">
+<optgroup label="Quick Style Chooser"><option class="hidden"></option></optgroup>
+<optgroup label="&nbsp;Standard Styles">
+<option value="16" class="">-- BA - Light Theme 2.0</option>
+<option value="13" class="" selected="selected">-- BA: Dark Theme</option>
+</optgroup>
+<optgroup label="&nbsp;Mobile Styles">
+<option value="14" class="">-- Default Mobile Style</option>
+</optgroup>
+</select>
+</form>
+<ul id="footer_links" class="footer_links">
+<li><a href="http://blenderartists.org">BlenderArtists</a></li>
+<li><a href="archive/index.php">Archive</a></li>
+<li><a href="poll.php?t=336897&amp;polloptions=8#top" onclick="document.location.hash='top'; return false;">Top</a></li>
+</ul>
+ 
+<form action="profile.php?do=dst" method="post" name="dstform">
+<input type="hidden" name="s" value=""/>
+<input type="hidden" name="securitytoken" value="1400200191-7e50d679f28ce13547d833772fe92ad03a487d9a"/>
+<input type="hidden" name="do" value="dst"/>
+</form>
+<script type="text/javascript">
+
+		<!--
+
+			var tzOffset = -5 + 1;
+
+			var utcOffset = new Date().getTimezoneOffset() / 60;
+
+			if (Math.abs(tzOffset + utcOffset) == 1)
+
+			{	// Dst offset is 1 so its changed
+
+				document.forms.dstform.submit();
+
+			}
+
+		//-->
+
+		</script>
+ 
+<script type="text/javascript">
+
+	<!--
+
+		// Main vBulletin Javascript Initialization
+
+		vBulletin_init();
+
+	//-->
+
+	</script>
+</div>
+</div>
+<div class="footerLinksWrapper">
+<div class="footerLinks clearfix">
+<dl>
+<dt>CGCOOKIE Network</dt>
+<dd>
+<a href="http://blendercookie.com/" target="_blank">Blender Cookie</a>
+<a href="http://workshops.cgcookie.com/" target="_blank">Blender Workshops</a>
+</dd>
+</dl>
+<dl>
+<dt>SITE SUPPORT</dt>
+<dd>
+<a href="http://blenderartists.org/forum/showgroups.php" target="_blank">Contact Team Leader</a>
+<a href="http://blenderartists.org/forum/forumdisplay.php?21-Blender-Artists-Website-Support" target="_blank">Website Support Forum</a>
+<a href="http://buysellads.com/buy/detail/51638/" target="_blank">Advertise</a>
+<a href="http://www.blender.org/blenderorg/blender-foundation/development-fund/" target="_blank">Support Blender</a>
+</dd>
+</dl>
+<dl>
+<dt>BLENDER ARTIST SOCIAL NETWORKS</dt>
+<dd>
+<a href="https://www.facebook.com/blenderartists" target="_blank">Facebook Group</a>
+<a href="https://twitter.com/#!/blenderartists" target="_blank">Twitter</a>
+</dd>
+</dl>
+<dl>
+<dt>POWER BY CG COOKIE</dt>
+<dd>
+<a href="http://cgcookie.com/about-cg-cookie/" target="_blank">About CG Cookie</a>
+<a href="http://studio.cgcookie.com/" target="_blank">Studio</a>
+<a href="http://codecanyon.net/?ref=cgcookie" target="_blank">Wordpress Plugins</a>
+</dd>
+</dl>
+</div>
+</div>
+ 
+<div class="footer_new">
+<a href="/">
+<img src="images/ba-misc/logo-small.png" alt="Blender Artists" class="logo"/>
+</a>
+<div class="copyright_new">
+&copy; 2012 CG Cookie, Inc. All Rights Reserved. <a href="http://cgcookie.com/terms-of-use/">Terms</a> &amp; <a href="http://cgcookie.com/privacy-policy/">Privacy</a>.
+</div>
+</div>
+</div>
+<script type="text/javascript">/* CloudFlare analytics upgrade */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&"www.cloudflare.com/email-protection"==a.substr(7 ,35)){s='';j=43;r=parseInt(a.substr(j,2),16);for(j+=2;a.length-j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
+/* ]]> */
+</script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+{ "from" : "doug", "to" : "doug", "note" : "fooington", "sent" : 1377803564, "_id" : { "$oid" : "521f9d9eec826d5720000001" }, "__v" : 0 }
+{ "from" : "chimpanzee", "to" : "protocoldoug testing 123 this is a test dude.", "note" : "protocoldoug testing 123 this is a test dude.", "sent" : 1377868232, "_id" : { "$oid" : "522099c897450f0a31000001" }, "__v" : 0 }

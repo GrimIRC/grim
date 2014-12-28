@@ -1,0 +1,215 @@
+	<!-- - - - - Search for a nick.... - - - - - - - - - - - - - - - -->
+
+	<div class="row featurette" ng-hide="filesuser">
+		<div class="page-header">
+			<h1>Find Files</h1>
+		</div>
+
+		<div class="form-group">
+			<label for="searchnick" class="col-sm-2 control-label">Search by user</label>
+				<div class="col-sm-10">
+				<input type="text" class="form-control" placeholder="Search by username (regex accepted.)" ng-model="searchnick" ng-change="searchByNick()">
+			</div>
+		</div>
+		<div class="clearfix"></div>
+
+		<div ng-switch="search_status" style="padding-top: 15px;">
+
+			<div ng-switch-when="tooshort" class="alert alert-warning" >
+				<strong>Try this...</strong> Search by two characters or more.
+			</div>
+
+			<div ng-switch-when="emptysearch">
+				<div class="alert alert-info" >
+					<strong>Search for a user</strong> Enter a username, and we'll search for them, to show you their files.
+				</div>
+
+				<h3>Top 100 Uploaders</h3>
+				<hr />
+
+				<div class="col-sm-4">
+				<div class="list-group">
+					<a ng-repeat="dude in top_files" href="#/files?user={{dude.nick}}" class="list-group-item">{{dude.nick}} <em class="pull-right">({{dude.total}} files)</em></a>
+				</div>
+				</div><!-- /.col-sm-4 -->
+
+			</div>
+
+			<div ng-switch-when="noresults" class="alert alert-warning" >
+				<strong>Sorry...</strong> No one's nick matches "{{searchnick}}".
+			</div>
+
+			<div ng-switch-when="results">
+			
+				<div class="col-sm-4">
+				<div class="list-group">
+					<a ng-repeat="nick in search_result" href="#/files?user={{nick}}" class="list-group-item">{{nick}}</a>
+				</div>
+				</div><!-- /.col-sm-4 -->
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<!-- - - - - Show and manage files... - - - - - - - - - - - - - - - -->
+
+	<div class="row featurette" ng-show="filesuser">
+
+		<div class="page-header">
+			<h1>Files for {{filesuser}}</h1>
+		</div>
+
+		<div class="files-filter-bar">
+
+			<div class="form-group" ng-switch="label_edit_status">
+
+				<span ng-switch-when="none">
+
+					<div class="row">
+
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">Showing Label:</span>
+								<select ng-model="$parent.filterlabel" ng-change="filterByLabel()" class="form-control" ng-options="label for label in labellist">
+									<option style="display:none" value="">{All Labels}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<button ng-show="label_is_editable" ng-click="labelEditMode()" type="button" class="btn btn-sm btn-info">Edit</button>
+							<span ng-show="label_is_editable" ng-switch="search_status" >
+								<button ng-hide="label_delete_warning" ng-click="label_delete_warning=true;" type="button" class="btn btn-sm btn-warning">Delete</button>
+								<button ng-show="label_delete_warning" ng-click="deleteLabel()" type="button" class="btn btn-sm btn-danger">Are you sure?</button>
+							</span>
+							<button ng-show="can_edit" ng-click="labelAddMode()" type="button" class="btn btn-sm btn-primary">Add New Label</button>
+						</div>
+
+					</div>
+
+				</span>
+
+				<span ng-switch-when="edit">
+					<!-- -  - - - - - - -  editing a label -->
+
+					<div class="col-sm-6">
+						<div class="input-group">
+							<span class="input-group-addon">Edit Label:</span>
+							<input type="text" ng-model="$parent.filterlabel" class="form-control" ng-enter="saveLabelEdit()" ng-options="label for label in labellist">
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<button ng-click="saveLabelEdit()" type="button" class="btn btn-sm btn-primary">Save</button>
+						<button ng-click="cancelLabelEdit()" type="button" class="btn btn-sm btn-info">Cancel</button>
+					</div>
+
+				</span>
+
+				<span ng-switch-when="add">
+					<!-- -  - - - - - - -  adding a label -->
+					
+					<div class="col-sm-6">
+						<div class="input-group">
+							<span class="input-group-addon">Add Label:</span>
+							<input type="text" placeholder="(Your new label)" ng-model="$parent.new_label" class="form-control" ng-options="label for label in labellist">
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<button ng-click="saveLabelAdd()" type="button" class="btn btn-sm btn-primary">Save</button>
+						<button ng-click="cancelLabelEdit()" type="button" class="btn btn-sm btn-info">Cancel</button>
+					</div>
+
+				</span>
+
+			</div>
+
+		</div>
+
+		<div class="clearfix"></div>
+		<HR/>
+
+		<div ng-hide="files_list.length" class="alert alert-info" >
+			<strong>Nope...</strong> No files found here.
+		</div>
+
+		<div class="row" ng-repeat="i in files_list.range()">
+
+			<div class="col-sm-6 col-md-4" ng-repeat="file in files_list.slice(i,i+3)">
+				<div class="thumbnail filegridhelper">
+					<div class="fileheader">
+						{{file.description}}&nbsp; <span ng-click="editIt($index+i)" ng-show="can_edit" class="glyphicon glyphicon-pencil pull-right fileediticon"></span>
+					</div>
+
+					<div ng-show="file.edit_mode" class="fileseditbox">
+
+						<div class="input-group">
+							<span class="input-group-addon">Description:</span>
+							<input ng-model="file.description" type="text" class="form-control" placeholder="Description">
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon">Label:</span>
+							<select ng-model="file.label" class="form-control" ng-options="label for label in labellist">
+								<option style="display:none" value="">{All Labels}</option>
+							</select>
+						</div>
+
+						<div class="fileeditbuttonbox">
+							<button ng-click="saveIt($index+i)" type="button" class="btn btn-sm btn-primary">Save</button>
+							<button ng-click="cancelIt($index+i)" type="button" class="btn btn-sm btn-info">Cancel</button>
+						
+							<span ng-hide="file.is_smc">
+								<button ng-hide="file.delete_warning" ng-click="file.delete_warning=1" type="button" class="btn btn-sm btn-warning">Delete?</button>
+								<button ng-show="file.delete_warning" ng-click="deleteIt($index+i)" type="button" class="btn btn-sm btn-danger">Are you <strong>sure</strong>?</button>
+							</span>
+						</div>
+						
+					</div>
+
+					<div class="filegridexpander text-center" ng-if="file.is_image">
+						<a ng-href="{{file.url}}" target="_blank"><img ng-src="{{file.url}}" class="filesthumb" alt="..."></a>
+					</div>
+					
+					<div class="filegridexpander text-center" ng-if="!file.is_image">
+						<a ng-href="{{file.url}}" target="_blank"><span class="glyphicon {{file.icon}} filetypeicon"></a>
+					</div>
+
+					<div class="caption">
+						<p ng-show="file.label"><strong>Labeled:</strong> {{file.label}}</p>
+						<p ng-show="file.legacy.file"><strong>Legacy file name:</strong> {{file.legacy.file}}</p>
+						<p><strong>Created:</strong> {{file.timeago}}</p>
+						<!-- <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<!--
+
+		<div class="col-sm-4" ng-repeat="file in files_list">
+			<div class="fileitem">
+				<div class="fileheader">
+					{{file.description}}&nbsp;
+				</div>
+
+				<img ng-show="file.is_image" ng-src="{{file.url}}" class="text-center filesthumb img-responsive"/>
+			</div>
+		</div>
+
+		-->
+
+		<div class="clearfix"></div>
+
+		<div ng-if="files_list">
+			<paginator baseurl="files_baseurl" maxperpage="MAX_PER_PAGE" maxpages="MAX_PAGES" total="files_datatotal"></paginator>
+		</div>
+
+
+	</div>

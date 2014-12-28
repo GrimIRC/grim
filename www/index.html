@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html ng-app="smcFrontEnd">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+		<title>speedmodeling.org</title>
+
+		<!-- Latest compiled and minified CSS -->
+		<!-- handy bootstrap page: http://getbootstrap.com/getting-started/ -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+		<!-- Custom styles for this template -->
+		<link href="/css/style.css" rel="stylesheet">
+		<link href="/css/login-form.css" rel="stylesheet">
+		<link href="/css/animate.css" rel="stylesheet">
+		<link href="/css/font.css" rel="stylesheet">
+
+		<script src="angular-upload/dist/angular-file-upload-shim.min.js"></script>  <!-- - - - - - - - - - file module! this line before loading angular -->
+
+		<!-- Include AngularJS & JQuery  -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-cookies.min.js"></script>
+
+		<script src="angular-upload/dist/angular-file-upload.min.js"></script>  <!-- - - - - - - - - - - - - - - - file module! this line after loading angular -->
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+		<!-- Google fonts -->
+		<link href='//fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+		<link href='//fonts.googleapis.com/css?family=Days+One' rel='stylesheet' type='text/css'>
+
+		<!-- socket.io -->
+		<script src="/socket.io/socket.io.js"></script>
+
+		<!-- font customizations -->
+		<style type="text/css">
+			textarea { font-family: 'Cutive Mono'; }
+			/* h2,h3,h4 { font-family: 'Days One', sans-serif; } */
+		</style>
+
+		<!-- How about our libraries? -->
+		<script src="/js/libs/moment-2.6.0-min.js"></script><!-- It's so nice we use it twice! (on front, and back end.) -->
+
+		<!-- And it ain't no fun without the smc frontend. -->
+		<script src="/js/smcFrontEnd.js"></script>
+		<script src="/js/uploadController.js"></script>
+		<script src="/js/loginController.js"></script>
+		<script src="/js/preferencesController.js"></script>
+		<script src="/js/smcSocketService.js"></script>
+		<script src="/js/smcController.js"></script>
+		<script src="/js/filesController.js"></script>
+		<script src="/js/paginationComponent.js"></script>
+		<script src="/js/hitEnterDirective.js"></script>
+
+		<style type="text/css">
+		</style>
+
+	</head>
+
+	<body ng-controller="smcMainController">
+
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#" style="font-family: 'Days One', sans-serif;">speedmodeling.org</a>
+				</div>
+				<div class="collapse navbar-collapse"> 
+					<ul class="nav navbar-nav">
+
+						<!-- nice example for showing selected page: http://jsfiddle.net/creatifyme/YCw99/ -->
+						
+						<li ng-class="navClass('home')" 	ng-click="switchPage('home')"><a href="#/home">Home</a></li>
+						<li ng-class="navClass('smc')" 		ng-click="switchPage('smc')"><a href="#/smc">SMC!</a></li>
+						<li ng-class="navClass('upload')" 	ng-click="switchPage('upload')"><a href="#/upload">Upload</a></li>
+						<li ng-class="navClass('files')" 	ng-click="switchPage('files')"><a href="#/files">Files</a></li>
+						<li ng-class="navClass('help')" 	ng-click="switchPage('help')"><a href="#/help">Help</a></li>
+						<li ng-class="navClass('about')" 	ng-click="switchPage('about')"><a href="#/about">About</a></li>
+					
+						<!-- drop down example
+							<li class="dropdown">
+								<a href="#/{{onPage}}" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li class="dropdown-header">Nav header</li>
+									<li><a href="#">Separated link</a></li>
+									<li><a href="#">One more separated link</a></li>
+								</ul>
+							</li>
+						-->
+
+					</ul>
+
+					<!-- - - - - - User login nav. -->
+
+					<ul class="nav navbar-nav pull-right">
+
+						<li ng-hide="login_status">
+							<a href="#/login">Login</a>
+						</li>
+
+						<li class="dropdown" ng-show="login_status">
+							<a href="#/{{onPage}}" class="dropdown-toggle" data-toggle="dropdown">
+								Welcome, {{username}}
+								<b class="caret"></b>
+							</a>
+
+							<ul class="dropdown-menu">
+								<li><a ng-href="#/files?user={{username}}">My Files</a></li>								
+								<li><a href="#/preferences">My Preferences</a></li>								
+								<li class="divider"></li>
+								<li><a href="#" ng-click="logOutUser()">Logout</a></li>
+							</ul>
+						</li>
+
+					</ul>
+
+
+				</div><!--/.nav-collapse -->
+			</div>
+
+		</div>
+
+		<!--
+		
+			<div class="container" ng-switch on="onPage" ng-controller="navControl">
+
+		-->
+
+		<div class="container">
+
+			<!-- animation removed, add this to animate: class="reveal-animation" -->
+			<div ng-view ></div>
+
+
+		</div>
+
+		<div id="footer">
+			<div class="container">
+				<p class="text-muted"><code>[ s m c m a n . 2 0 1 4 ]</code></p>
+			</div>
+		</div>
+
+	</body>
+</html>

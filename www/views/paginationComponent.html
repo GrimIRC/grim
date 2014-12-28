@@ -1,0 +1,10 @@
+<ul class="pagination">
+	<li><a href="{{baseurl}}page=1">&laquo;</a></li>
+
+	<li ng-repeat="page in paginator" class="{{page.class}}">
+		<a ng-href="{{baseurl}}page={{page.page}}">{{page.page}}</a>
+	</li>
+
+	<li><a ng-href="{{baseurl}}page={{paginator_lastpage}}">&raquo;</a></li>
+</ul>
+

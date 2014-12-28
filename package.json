@@ -1,0 +1,36 @@
+{
+  "name": "smc-bot",
+  "preferGlobal": true,
+  "version": "0.0.1",
+  "author": "Doug Smith <info@laboratoryb.org>",
+  "description": "An IRC bot for running speed modeling challenges.",
+  "scripts": {
+    "start": "node ./runBot.js"
+  },
+  "main": "./runBot.js",
+  "repository": {
+    "type": "svn",
+    "url": "https://none/yet/"
+  },
+  "keywords": [
+    "irc",
+    "bot",
+    "asterisk"
+  ],
+  "dependencies" : {
+    "irc"   :  "*",
+    "mongoose"   :  "*",
+    "request"   :  "*",
+    "moment"   :  "*",
+    "node-schedule" : "*",
+    "sprintf-js" : "*",
+    "exec-sync"   :  "*",
+    "MD5"   :  "*",
+    "bcrypt" : "*",
+    "cheerio" : "*",
+    "restify"   :  "*",
+    "socket.io"   :  "*",
+    "mv"   :  "*",
+    "google"	: "*"
+  }
+}

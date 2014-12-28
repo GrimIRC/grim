@@ -1,0 +1,64 @@
+	<div class="page-header">
+		<h1>Upload</h1>
+	</div>
+
+	<div class="container" ng-switch on="uploadMode">
+
+		<div class="container" ng-switch-when="loading">
+			<p><a href="#upload?key=f00f000">Uploooooad</a></p>
+			<p class="text-center"><img src="images/ajax-loader.gif" /></p>
+		</div>
+
+		<div class="container" ng-switch-when="sorry">
+			<p>In order to upload a file, you'll need to visit us on irc.freenode.net and use the<code>!upload</code> function of the bot</p>
+		</div>
+
+		<div class="container" ng-switch-when="loggedin">
+			<img src="/images/ajax-loader.gif" style="padding-right: 15px;" />Cool, you're logged in, hold on a sec, and we'll have you upload a file.
+		</div>
+
+
+		<div class="container" ng-switch-when="upload">
+			Do upload <HR />
+
+			<!-- !bang -->
+			
+			<div ng-file-drop="onFileSelect($files)" class="alert alert-success" ng-file-drag-over-class="alert alert-warning"
+				ng-show="dropSupported"><h3>Drop files here!</h3></div>
+			
+			<p>or</p>
+
+			<input type="file" ng-file-select="onFileSelect($files)" >
+			
+
+			<div ng-file-drop-available="dropSupported=true" 
+				ng-show="!dropSupported"><!-- HTML5 Drop File is not supported! --></div>
+			
+			<!--
+				<button ng-click="upload.abort()">Cancel Upload</button>
+			-->
+
+		</div>
+
+		<div class="container" ng-switch-when="upload-in-progress">
+
+			<h2>Uploading now.... {{upload_percent}}%</h2>
+
+		</div>
+
+		<div class="container" ng-switch-when="upload-error">
+		
+			<h4>Fudge... That upload errored out</h4>
+			<p><div class="well">{{uploadError}}</div></p>
+
+		</div>
+
+
+		<div class="container" ng-switch-when="upload-success">
+			<h2>Upload success!</h2>
+			<p>You've uploaded: <a href="{{uploadedURL}}">{{uploadedURL}}</a></p>
+		</div>
+
+
+
+	</div>

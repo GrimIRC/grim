@@ -1,0 +1,106 @@
+	<div class="page-header">
+		<h1>SMC</h1>
+	</div>
+
+	<div class="alert alert-warning" ng-show="smc_ended">
+		<strong>Heads up!</strong> So, the SMC ended.
+	</div>
+
+	<div class="row featurette" ng-show="smc">
+
+		<!-- - - - - - - - - - - - - SMC info & timer panel  -->
+
+		<div class="col-md-7">
+
+			<h2 class="featurette-heading">SMC in progress: <span class="text-muted">{{smc.topic}}</span></h2>
+			<h3 class="featurette-heading">Runs for <span class="digifont">{{smc.duration}}</span> minutes<span class="text-muted"> Starting @ <span class="digifont">**:{{smc.startminute}}</span></span></h2>
+		  
+			<p class="lead">
+
+				<div class="col-md-8 digifont clock-container" style="">
+					<div class="col-md-7 clock-label">{{time_message}}</div>
+					<div class="col-md-5 clock-time">{{clock_hours}}{{clock_minutes}} : {{clock_seconds}}</div>
+				</div>
+
+			</p>
+
+		</div>
+
+		<!-- - - - - - - - - - - - - Who's in panel.  -->
+
+		<div class="col-md-5">
+			<ul class="list-group">
+
+				<li class="list-group-item active">
+					<!-- !TODO: freaking vertical centering is not making me happy, DS. Decided to leave it be. -->
+					<div class="pull-left">
+						<span style="color: white;"><strong>!whosin</strong></span>
+					</div>
+					<div class="pull-right" ng-show="login_status">
+						<button type="button" ng-hide="in_smc" class="btn btn-sm btn-success pull-right" ng-click="joinOrLeaveSMC(true)">Join!</button>
+						<button type="button" ng-show="in_smc" class="btn btn-sm btn-danger pull-right" ng-click="joinOrLeaveSMC(false)">Quit!</button>
+					</div>
+					<div class='clearfix'></div>
+				</li>
+
+				<li class="list-group-item" ng-repeat="dude in smc.smcers">
+					{{dude.nick}} <span ng-show="dude.uploaded" class="glyphicon glyphicon-ok"></span>
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+
+	<div class="alert alert-info" ng-hide="smc">
+		<h5>There's no live SMC in progress, right now. (When there is, you'll see info about it here)</h5>
+
+	</div>
+	
+	<div class="page-header">
+		<h2>Previous SMCs</h2>
+	</div>
+
+	<div class="alert alert-info" ng-hide="login_status">
+		<h5>Did you know that you can vote on these if you're logged in? <a href="#/login">Login!</a></h5>
+	</div>
+
+	<div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{search_metric}} <span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="setSearchMetric('Topic')">Topic</a></li>
+          <li><a ng-click="setSearchMetric('Nick')">Nick</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+      <input type="text" class="form-control" ng-model="search_text" ng-change="setSearchText()">
+    </div><!-- /input-group -->
+
+	<div class="smcpane" ng-repeat="eachsmc in smc_list">
+		<h4>{{eachsmc.topic}}</h4>
+		<p>Went for {{eachsmc.duration}} Minutes @ {{eachsmc.startsat}}<p>
+		<div class="smcentry" ng-repeat="entry in eachsmc.smcers">
+			
+			<div class="smcentryhead">
+				{{entry.votes}} Votes - {{entry.nick}}
+			</div>
+			
+			<div class="entryimagecontainer">
+		
+				<span ng-show="$parent.login_status">
+				
+					<span class="glyphicon glyphicon-unchecked entryglyphACTIVE" ng-click="submitVote(eachsmc._id,entry.nick)" ng-hide="entry.user_voted"></span>
+					<span class="glyphicon glyphicon-check entryglyphSELECTED" ng-show="entry.user_voted"></span>
+				
+				</span>
+				
+				<img ng-src="{{entry.url}}" width="325">
+			</div>
+			
+		</div>
+	</div>
+
+	<div ng-if="smc_list">
+		<paginator baseurl="smc_baseurl" maxperpage="smc_maxperpage" maxpages="smc_maxinpaginator" total="smc_datatotal"></paginator>
+	</div>
+
